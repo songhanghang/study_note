@@ -24,7 +24,7 @@ activity内存泄露是指activity生命周期结束后,依旧被引用,无法�
 
 ##3. 线程导致的内存泄露 
 
- * 匿名内部线程,在activity销毁时m未执行完
+ * 匿名内部线程,在activity销毁时未执行结束
  
  * 匿名内部线程中启动Looper,线程变成死循环，activtity销毁时,looper未quit
  
