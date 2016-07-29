@@ -4,12 +4,11 @@ activity内存泄露是指activity生命周期结束后,依旧被引用，无法
 
 ##1  Activity实例作为context被static对象或者生命周期长于activity的对象引用 
 
-   eg:    
-         （1）Application | Service 持有activity引用
-   
-        （2）单例持有activity
-        
-        （3）静态的Drawable，Drawable设置到view时，会设置callback指向view，view中索引context
+ * Application | Service 持有activity引用
+ 
+ * 单例持有activity
+ 
+ * 静态的Drawable，Drawable设置到view时，会设置callback指向view，view中索引context
         
    修改方法： 千万小心静态，优先使用ApplicationContext代替Activity实例，必须使用activity时一定要检查引用关系，注意离开时注销
 
