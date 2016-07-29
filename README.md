@@ -1,16 +1,16 @@
 #Activity内存泄露总结：
 
-activity内存泄露是指activity生命周期结束后,依旧被引用,无法被gc释放
+> activity内存泄露是指activity生命周期结束后,依旧被引用,无法被gc释放
 
 ##1. Activity实例作为context被static对象或者生命周期长于activity的对象引用 
 
- * Application | Service 持有activity引用
- 
- * 单例持有activity引用
- 
- * static的Drawable (Drawable设置到view时,会设置callback指向view,view中索引context)
+ > * Application | Service 持有activity引用
+ > 
+ > * 单例持有activity引用
+ >
+ > * static的Drawable (Drawable设置到view时,会设置callback指向view,view中索引context)
 
- > 修改方法: 千万小心static; 优先使用ApplicationContext代替Activity实例,必须使用activity时一定要检查引用关系,注意离开时注销
+ 修改方法: 千万小心static; 优先使用ApplicationContext代替Activity实例,必须使用activity时一定要检查引用关系,注意离开时注销
 
 ##2. 因匿名内部类间接持有外部类对象引用,在activity中使用匿名内部类易造成内存泄露
 
