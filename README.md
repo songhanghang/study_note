@@ -1,4 +1,4 @@
-#Activity内存泄露总结：
+#Activity内存泄露case总结
 
 activity内存泄露是指activity生命周期结束后,依旧被引用,无法被gc释放
 
