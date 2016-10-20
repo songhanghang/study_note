@@ -20,7 +20,7 @@ android系统升级有三种方式：
         
 ### apk 增量升级
 
->apk升级时只下载小内存增量文件，然后合并生成新的apk进行安全，节省用户流量，降低用户升级成本！
+>apk升级时只下载小内存增量文件，然后合并生成新的apk进行安装，节省用户流量，降低用户升级成本！
    
    [参见1: http://gold.xitu.io/post/57fba92abf22ec00649de645](http://gold.xitu.io/post/57fba92abf22ec00649de645)
    
