@@ -11,13 +11,13 @@
 2.  修改或者添加插件apk时
     * 修改： 在插件中修改代码，如果class中import新的类名，如下：
     
-            * import com.letv.android.client.album.flow.model.AlbumStreamSupporter
+             * import com.letv.android.client.album.flow.model.AlbumStreamSupporter
     
      务必添加该import类的keep保护，如下：
     
-            * -keep class com.letv.android.client.album.flow.model.AlbumStreamSupporter {*;}
+           * -keep class com.letv.android.client.album.flow.model.AlbumStreamSupporter {*;}
     
-            * -keep class com.letv.android.client.album.flow.model.AlbumStreamSupporter$* {*;}
+           * -keep class com.letv.android.client.album.flow.model.AlbumStreamSupporter$* {*;}
     
     
     * 添加：
