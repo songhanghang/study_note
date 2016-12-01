@@ -41,7 +41,7 @@
 ****
 1. 实体类    ***WARING***
 
-        如无特殊情况，务必实现LetvBaseBean, 基类集成类已经全部keep
+        如无特殊情况，务必实现LetvBaseBean, 基类继承类已经全部keep
 2. 第三方jar   ***WARING***
 
         如果第三方jar提供官方的keep规则,可以进行jar局部混淆。
