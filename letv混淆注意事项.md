@@ -47,7 +47,7 @@
         如果第三方jar提供官方的keep规则,可以进行jar局部混淆.
         否则,keep jar内所有包名
 3. 与js互相调用的类    ***WARING***
-4. 反射用的类或者方法   ***WARING***
+4. 反射类或者方法   ***WARING***
 5. 实现序列化本地保存的类   ***HAS***
 6. 所有Activity的类名   ***HAS***
 7. View构造方法和Get Set    ***HAS***
