@@ -6,12 +6,12 @@
 
 1.  替换或者添加jar包时
 
-    * 替换： 切记对比前后jar包名是否一致，是否有新添加的包名，如果有，务必重新添加keep保护
+    * 替换: 切记对比前后jar包名是否一致,是否有新添加的包名,如果有,务必重新添加keep保护
     
-    * 添加：  切记添加新的keep保护jar不被混淆，或者添加对应jar的局部keep规则
+    * 添加:  切记添加新的keep保护jar不被混淆,或者添加对应jar的局部keep规则
     
 2.  修改或者添加插件apk时
-    * 修改： 在插件中修改代码，如果class中import新的类名，如下：
+    * 修改： 在插件中修改代码，如果class中import新的类名，如下:
     
              * import com.letv.android.client.album.flow.model.AlbumStreamSupporter
     
@@ -41,11 +41,11 @@
 ****
 1. 实体类    ***WARING***
 
-        如无特殊情况，务必实现LetvBaseBean, 基类继承类已经全部keep
+        如无特殊情况,务必实现LetvBaseBean, 基类继承类已经全部keep
 2. 第三方jar   ***WARING***
 
-        如果第三方jar提供官方的keep规则,可以进行jar局部混淆。
-        否则，keep jar内所有包名
+        如果第三方jar提供官方的keep规则,可以进行jar局部混淆.
+        否则,keep jar内所有包名
 3. 与js互相调用的类    ***WARING***
 4. 反射用的类或者方法   ***WARING***
 5. 实现序列化本地保存的类   ***HAS***
