@@ -40,12 +40,11 @@
 ***WARING***  = 时刻警惕
 ****
 1. 实体类    ***WARING***
-
-        如无特殊情况,务必实现LetvBaseBean, 基类继承类已经全部keep
+     > 如无特殊情况,务必实现LetvBaseBean, 基类继承类已经全部keep
 2. 第三方jar   ***WARING***
-
-        如果第三方jar提供官方的keep规则,可以进行jar局部混淆.
-        否则,keep jar内所有包名
+     > 如果第三方jar提供官方的keep规则,可以进行jar局部混淆.
+     
+     > 否则,keep jar内所有包名
 3. 与js互相调用的类    ***WARING***
 4. 反射类或者方法   ***WARING***
 5. 实现序列化本地保存的类   ***HAS***
