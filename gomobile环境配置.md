@@ -8,15 +8,15 @@ wiki: [https://github.com/golang/go/wiki/Mobile](https://github.com/golang/go/wi
 
 gobind: [https://godoc.org/golang.org/x/mobile/cmd/gobind](https://godoc.org/golang.org/x/mobile/cmd/gobind)
 
-## 1 安装gomobile工具
+## 安装gomobile工具
 > 前提go环境已经搭建完成
 
-### 1.1 官方推荐安装方法
+###  官方推荐安装方法
 ``` $ go get golang.org/x/mobile/cmd/gomobile ```
 
 坑：需要科学上网，公司网络提示le.com证书失效，此方法未能下载安装。
 
-### 1.2 手动安装
+### 手动安装
 1. ```$ git clone https://github.com/golang/mobile ```
 
    下载成功后改文件名为mobile, copy到$GOPATH/src/golang.org/x/ 
@@ -41,11 +41,11 @@ gobind: [https://godoc.org/golang.org/x/mobile/cmd/gobind](https://godoc.org/gol
    
    末尾路径为ndk安装路径，针对自己安装目录选择。
    
-## 3 编译 android demo
+## 编译 android demo
  ```  $ gomobile build -target=android golang.org/x/mobile/example/basic```
  
  
-## 4 运行 android demo
+## 运行 android demo
 确定adb已经识别手机
 
 ```$ gomobile install golang.org/x/mobile/example/basic ``` 
