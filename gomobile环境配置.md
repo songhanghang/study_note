@@ -25,7 +25,7 @@ gobind: [https://godoc.org/golang.org/x/mobile/cmd/gobind](https://godoc.org/gol
 
    build gomobile成功后会在$GOPATH/bin目录生成gomobile可执行程序，（执行过程中可能出现权限被拒，添加对应权限即可），copy生成的gomobile程序至/usr/local/go/bin/目录，此时便可以执行gomobile命令了。
    
-##2 配置编译环境
+## 配置编译环境
 
 ``` $ gomobile init ```
 
