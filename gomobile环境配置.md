@@ -32,7 +32,7 @@ gobind: [https://godoc.org/golang.org/x/mobile/cmd/gobind](https://godoc.org/gol
   初始化环境，自动下载安装依赖，需要翻墙，可能会提示权限被拒，添加对应文件权限。
 
   
-### android ndk配置
+### Android Ndk配置
    可能会提示" No android NDK path is set "错误。解决办法如下:
 
    因gomobile init未同时下载ndk，所以需要手动下载ndk环境，然后执行
@@ -41,11 +41,11 @@ gobind: [https://godoc.org/golang.org/x/mobile/cmd/gobind](https://godoc.org/gol
    
    末尾路径为ndk安装路径，针对自己安装目录选择。
    
-## 编译 android demo
+## 编译 Android Demo
  ```  $ gomobile build -target=android golang.org/x/mobile/example/basic```
  
  
-## 运行 android demo
+## 运行 Android Demo
 确定adb已经识别手机
 
 ```$ gomobile install golang.org/x/mobile/example/basic ``` 
