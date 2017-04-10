@@ -50,7 +50,7 @@ gobind: [https://godoc.org/golang.org/x/mobile/cmd/gobind](https://godoc.org/gol
 
 ```$ gomobile install golang.org/x/mobile/example/basic ``` 
 
-安装成功后，即可打开这个可以随手势移动的三角形程序。
+安装成功后，即可打开一个随手势移动的三角形程序。
 
 
 ## 总结：
