@@ -8,7 +8,7 @@
 ![.9图片](http://imglf0.nosdn.127.net/img/Q3dzYVVKdDlxT21CTEpLdmhuT3VzVDl6Q0RsWVdKcGlGMWNnQThGbU90OS8wSFAzd1NUWDVBPT0.jpg?imageView&thumbnail=500x0&quality=96&stripmeta=0&type=jpg)
 
 
-* deafault & centerCrop 同样裁剪中间显示
+* deafault&centerCrop 同样裁剪中间显示
 
 ```<ImageView
         android:layout_width="200dp"
