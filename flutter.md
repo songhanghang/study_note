@@ -233,6 +233,16 @@ flutter:
   uses-material-design: true
 ```
 ## 资源管理
+Flutter应用程序可以包含代码和 assets（有时称为资源）。assets是会打包到程序安装包中的，可在运行时访问。常见类型的assets包括静态数据（例如JSON文件）、配置文件、图标和图片（JPEG，WebP，GIF，动画WebP / GIF，PNG，BMP和WBMP）等。
+Flutter也使用pubspec.yaml文件来管理应用程序所需的资源
+
+
+```
+  flutter:
+  assets:
+    - assets/my_icon.png
+    - assets/background.png
+```
 
 ## 工欲善其事必先利其器
 环境配置略过...
@@ -251,4 +261,324 @@ void main() {
 }
 ```
 ### 一些有意思的工具
+
+#### Select Widget Mode
+
+滑动时显示触摸区域对应的Widget类型。
+
+![](https://wx2.sinaimg.cn/mw690/006292TQly1g491cv5nf9g30a80fl7wl.gif)
+
+#### Refresh Widget Info
+
+刷新 rebuild widget。
+
+#### Show Performance Overlay
+
+显示每帧GPU绘制时间，和UI绘制时间，分别显示单帧最大绘制时间和平均绘制时间，debug模式JIT边解释边执行导致UI不能跑慢60帧每秒。
+
+![](https://wx2.sinaimg.cn/mw690/006292TQly1g491nqk44og30ah0ilqv8.gif)
+
+#### Toggle Platform
+
+切换Android和IOS平台, 注意不只是TitleBar显示效果不同，转场动画也不相同。
+
+![](https://wx1.sinaimg.cn/mw690/006292TQly1g4920glkqhg309r0hbe84.gif)
+
+![](https://wx3.sinaimg.cn/mw690/006292TQly1g4920i5z51g30a40hykjo.gif)
+
+#### Show Debug Paint
+
+显示View边框
+
+![](https://wx1.sinaimg.cn/mw690/006292TQly1g492agwkb1j30am0ixqbm.jpg)
+
+#### Show Paint Baselines
+
+显示Text基准线
+
+![](https://wx1.sinaimg.cn/mw690/006292TQly1g492cebm1pj30am0ixagj.jpg)
+
+#### debugPaintPointersEnabled
+
+显示突出对象
+
+![](https://wx3.sinaimg.cn/mw690/006292TQly1g492kv7r98j30am0ix43o.jpg)
+
+#### debugPaintLayerBordersEnabled
+
+显示层级边界
+
+![](https://wx3.sinaimg.cn/mw690/006292TQly1g492n56azoj30am0ixn3a.jpg)
+
+#### debugRepaintRainbowEnabled 
+
+显示重绘
+
+![](https://wx2.sinaimg.cn/mw690/006292TQly1g492qil7dwg30a40hy7wj.gif)
+
+
+## DEMO 新闻客户端
+
+[**https://github.com/songhanghang/flutter_news_demo**](https://github.com/songhanghang/flutter_news_demo)
+
+![gif](https://wx2.sinaimg.cn/mw690/006292TQly1g3v1ygaisdg30dc0np1l0.gif)
+
+源码：
+
+``` dart
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+
+Dio dio = Dio();
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: ScrollableTabsDemo(),
+    );
+  }
+}
+
+class _Page {
+  _Page({this.text, this.key})
+      : this.url = "https://3g.163.com/touch/reconstruct/article/list/$key/0-20.html";
+  final String text;
+  final String key;
+  final String url;
+  final List<_News> list = List();
+
+  Future _request() async {
+    Response response = await dio.get(url);
+    String value = response.toString();
+    value = value.substring(9, value.length - 1);
+    Map<String, dynamic> map = json.decode(value);
+    List data = map[key];
+    list.clear();
+    data.forEach((value) {
+      list.add(_News.fromJson(value));
+    });
+    return response;
+  }
+}
+
+class _News {
+  final String title;
+  final String url;
+  final String skpUrl;
+  final String image;
+  final String digest;
+  final String time;
+
+  _News.fromJson(Map<String, dynamic> json)
+      : title = json["title"],
+        url = json["url"],
+        skpUrl = json["skipURL"],
+        image = json["imgsrc"],
+        digest = json["digest"],
+        time = json["ptime"];
+}
+
+List<_Page> _allPages = <_Page>[
+  _Page(text: '新闻', key: "BBM54PGAwangning"),
+  _Page(text: '娱乐', key: "BA10TA81wangning"),
+  _Page(text: '体育', key: "BA8E6OEOwangning"),
+  _Page(text: '财经', key: "BA8EE5GMwangning"),
+  _Page(text: '军事', key: "BAI67OGGwangning"),
+  _Page(text: '科技', key: "BA8D4A3Rwangning"),
+  _Page(text: '手机', key: "BAI6I0O5wangning"),
+  _Page(text: '数码', key: "BAI6JOD9wangning"),
+  _Page(text: '时尚', key: "BA8F6ICNwangning"),
+  _Page(text: '游戏', key: "BAI6RHDKwangning"),
+  _Page(text: '教育', key: "BA8FF5PRwangning"),
+  _Page(text: '健康', key: "BDC4QSV3wangning"),
+  _Page(text: '旅游', key: "BEO4GINLwangning"),
+];
+
+class ScrollableTabsDemo extends StatefulWidget {
+  @override
+  _ScrollableTabsState createState() => _ScrollableTabsState();
+}
+
+class _ScrollableTabsState extends State<ScrollableTabsDemo>
+    with SingleTickerProviderStateMixin {
+  TabController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TabController(vsync: this, length: _allPages.length);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Decoration _getIndicator() {
+    return ShapeDecoration(
+      shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            side: BorderSide(color: Colors.white70, width: 1.5),
+          ) +
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4.0)),
+            side: BorderSide(color: Colors.transparent, width: 8.0),
+          ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverOverlapAbsorber(
+              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+              child: SliverAppBar(
+                title: const Text('News'),
+                pinned: false,
+                backgroundColor: Colors.red,
+                forceElevated: innerBoxIsScrolled,
+                bottom: TabBar(
+                  controller: _controller,
+                  isScrollable: true,
+                  labelColor: Colors.white,
+                  indicator: _getIndicator(),
+                  tabs: _allPages.map<Tab>((_Page page) {
+                    return Tab(text: page.text);
+                  }).toList(),
+                ),
+              ),
+            ),
+          ];
+        },
+        body: TabBarView(
+          controller: _controller,
+          children: _allPages.map<Widget>((_Page page) {
+            return SafeArea(
+              top: false,
+              bottom: true,
+              child: _PageWidget(page),
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+}
+
+class _PageWidget extends StatefulWidget {
+  const _PageWidget(this.page, {Key key}) : super(key: key);
+  final _Page page;
+
+  @override
+  State<StatefulWidget> createState() {
+    return _PageWidgetState();
+  }
+}
+
+class _PageWidgetState extends State<_PageWidget> {
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshData();
+  }
+
+  Future _refreshData() async {
+    Response response = await widget.page._request();
+    setState(() {});
+    return response;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RefreshIndicator(
+      key: _refreshIndicatorKey,
+      onRefresh: _refreshData,
+      child: Scrollbar(
+        child: ListView.builder(
+          padding: kMaterialListPadding,
+          itemCount: widget.page.list.length,
+          itemBuilder: (BuildContext context, int index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  String url = widget.page.list[index].url;
+                  if (!url.startsWith("http")) {
+                    url = widget.page.list[index].skpUrl;
+                  }
+                  return WebviewScaffold(
+                      appBar: AppBar(title: Text("详情"), backgroundColor: Colors.red),
+                      url: url);
+                }));
+              },
+              child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    children: <Widget>[
+                      DecoratedBox(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(3.0),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black54,
+                                  offset: Offset(2.0, 2.0),
+                                  blurRadius: 4.0)
+                            ]),
+                        child: Image.network(
+                          widget.page.list[index].image,
+                          width: 140,
+                          height: 80,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Expanded(
+                          flex: 1,
+                          child: Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Wrap(
+                                    children: <Widget>[
+                                      Text(widget.page.list[index].title),
+                                      Text(
+                                        widget.page.list[index].digest,
+                                        style: TextStyle(
+                                            color: Colors.black87,
+                                            fontSize: 10.0),
+                                      ),
+                                      Text(
+                                        widget.page.list[index].time,
+                                        style: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 8.0),
+                                      )
+                                    ],
+                                  ))))
+                    ],
+                  )),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+```
 
