@@ -130,10 +130,6 @@ class A implements Serializable {
 7.1以上就出现逃逸的脏数据，test会诡异的变成null, 如果test变量在代码中要求非空注入，则反序列化后的脏数据将导致各种不合预期的错误！
 
 
-线上该问题：
 
-https://keep.corp.kuaishou.com/#/exception-analysis/crash/android/crash/detail?pid=32&md5=7e4e063705b75654117aa0b8de9baed2&queryParams=%7B%22start_time%22%3A%7B%22val%22%3A1603160941363,%22symbol%22%3A%22in%22%7D,%22end_time%22%3A%7B%22val%22%3A1603420141363,%22symbol%22%3A%22in%22%7D,%22assigner%22%3A%7B%22val%22%3A%5B%22songhang%22%5D,%22symbol%22%3A%22in%22%7D%7D&activeTab=follow_msg
-
-http://keep.corp.kuaishou.com/#/exception-analysis/crash/android/crash/detail?pid=1&md5=7e4e063705b75654117aa0b8de9baed2&queryParams=%7B%22start_time%22%3A%7B%22val%22%3A1598889600000,%22symbol%22%3A%22in%22%7D,%22end_time%22%3A%7B%22val%22%3A1602864000000,%22symbol%22%3A%22in%22%7D%7D&activeTab=system_msg
 
 
