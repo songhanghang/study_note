@@ -1,4 +1,4 @@
-Android 高低版本分享差异很大， 高版本必须通过fileprovider实现，Android11后文件接受方，无法拿到发送方文件的绝对目录，导致分享失败
+Android 高低版本分享差异很大， 高版本必须通过fileprovider实现，Android11后文件接受方无法拿到发送方文件的绝对目录，导致分享失败
 
 反编译RE文件管理器找到一种，绕过fileprovider的实现方式。
 
