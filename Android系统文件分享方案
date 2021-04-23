@@ -1,0 +1,20 @@
+Android 高低版本分享差异很大， 高版本必须通过fileprovider实现，Android11后文件接受方，无法拿到发送方文件的绝对目录，导致分享失败
+
+反编译RE文件管理器找到一种，绕过fileprovider的实现方式。
+
+
+
+/**
+   * Kim接收文件分享有bug,多场景下分享失败, 测试时发现RE文件管理器可以分享kim。
+   * 反编译RE文件管理器, 发送文件时绕过FileProvider，实现了文件分享!!!
+   */
+  private fun hackKimUri(paramFile: File, paramContext: Context): Uri? {
+    return try {
+      val externalUri: Uri = MediaStore.Files.getContentUri("external")
+      val contentValues = ContentValues()
+      contentValues.put("_data", paramFile.absolutePath)
+      paramContext.contentResolver.insert(externalUri, contentValues)
+    } catch (e: Throwable) {
+      null
+    }
+  }
